@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">PortoweWidoki</string>
-    <string name="main_activity_title">Hi journey!</string>
+    <string name="main_activity_title">Hi journey!\nDruga linia</string>
 </resources>

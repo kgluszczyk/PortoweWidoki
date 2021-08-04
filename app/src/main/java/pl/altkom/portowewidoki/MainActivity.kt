@@ -1,8 +1,13 @@
 package pl.altkom.portowewidoki
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,6 +19,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         onResumeCount = savedInstanceState?.getInt(ResumeCountKey) ?: onResumeCount
         setContentView(R.layout.activity_main)
+        findViewById<Button>(R.id.cta).setOnClickListener {
+            findViewById<EditText>(R.id.country).text.also { text ->
+                Intent(this, PortyActivity::class.java).apply {
+                    putExtra(PortyActivity.CountryKey, text.toString())
+                }.also {
+                    startActivity(it)
+                }
+            }
+        }
         Log.d(tag, "ON_CREATE")
     }
 
@@ -24,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if(BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             Log.d(tag, "ON_START")
         }
     }

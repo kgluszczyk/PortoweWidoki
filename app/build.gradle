@@ -17,7 +17,15 @@ android {
     }
 
     buildTypes {
+        debug {
+            debuggable true
+        }
+        superDebug.initWith(buildTypes.debug)
+        superDebug {
+            debuggable false
+        }
         release {
+            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

@@ -1,0 +1,12 @@
+SCIAGA
+
+Jednostki
+val bazowa_gestosc_mdpi = 160
+DP = rozmiar_elementu * gestosc_ekranu/bazowa_gestosc_mdpi
+
+SP = DP * wspolczynnik_czcionki
+
+MAKE_PROJECT - task gradlowy assebmbleDebug
+INSTALL - adb install <sciezka>
+
+RUN = MAKE_PROJECT + INSTALL

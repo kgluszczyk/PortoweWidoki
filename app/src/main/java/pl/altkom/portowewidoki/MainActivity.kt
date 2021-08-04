@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        onResumeCount = savedInstanceState?.getInt(ResumeCountKey) ?: onResumeCount
         setContentView(R.layout.activity_main)
         Log.d(tag, "ON_CREATE")
     }

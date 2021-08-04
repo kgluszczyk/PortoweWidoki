@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/portImage"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:scaleType="centerCrop"
@@ -22,19 +22,20 @@
             tools:src="@drawable/port" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/portName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/portImage"
             tools:text="Port Gdański" />
 
         <TextView
+            android:id="@+id/portCountry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@+id/portName"
             tools:text="POLSKA" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

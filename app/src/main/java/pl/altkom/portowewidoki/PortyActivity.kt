@@ -29,6 +29,10 @@ class PortyActivity : AppCompatActivity() {
                 }
             }
             adapter.setData(portList)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.port_detail_container, PortFragment.newInstance(port))
+                .addToBackStack("PortFragment")
+                .commit()
         }
         //Interface aka. Java style
         /* val adapter = PortsAdapter(portList, object : OnClick2 {

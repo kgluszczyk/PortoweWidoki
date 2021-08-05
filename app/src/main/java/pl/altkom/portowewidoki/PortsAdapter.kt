@@ -35,14 +35,7 @@ class PortsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(port: PortModel, clickListener: OnPortClick) {
         with(itemView) {
-            findViewById<ImageView>(R.id.portImage).setImageResource(port.image)
-            findViewById<TextView>(R.id.portName).text = port.name
-            findViewById<TextView>(R.id.portCountry).text = port.location
-            if (port.isFavourite) {
-                findViewById<TextView>(R.id.portName).setTextColor(resources.getColor(R.color.teal_700))
-            } else {
-                findViewById<TextView>(R.id.portName).setTextColor(resources.getColor(R.color.black))
-            }
+            setUpPortCardView(port)
             setOnClickListener {
                 clickListener(port)
                 //Interface aka. Java style
@@ -50,6 +43,7 @@ class PortsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             }
         }
     }
+
 }
 typealias OnPortClick = (PortModel) -> Unit
 

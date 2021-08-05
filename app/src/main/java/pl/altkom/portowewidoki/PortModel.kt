@@ -1,8 +1,16 @@
 package pl.altkom.portowewidoki
 
+import android.os.Parcelable
 import androidx.annotation.DrawableRes
+import kotlinx.parcelize.Parcelize
 
-data class PortModel(val name: String, val location: String, @DrawableRes val image: Int, val isFavourite: Boolean = false)
+@Parcelize
+data class PortModel(
+    val name: String,
+    val location: String,
+    @DrawableRes val image: Int,
+    val isFavourite: Boolean = false
+) : Parcelable
 
 object PortStorage {
 

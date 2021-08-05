@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.215625" />
+        <entry key="app/src/main/res/layout-h960dp-port/activity_porty.xml" value="0.33" />
+        <entry key="app/src/main/res/layout-w940dp-land/activity_porty.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_porty.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.24479166666666666" />

@@ -12,13 +12,23 @@ class PortyActivity : AppCompatActivity() {
         const val CountryKey = "CountryKey"
     }
 
+    lateinit var adapter: PortsAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_porty)
         val selectedCountryCode = intent.extras?.getString(CountryKey)
-        val portList = PortStorage.ports.filter { it.location == selectedCountryCode }
-        val adapter = PortsAdapter(portList) { port ->
+        var portList = PortStorage.ports.filter { it.location == selectedCountryCode }
+        adapter = PortsAdapter(portList) { port ->
             Toast.makeText(this, "Kliknięto2:${port.name}", Toast.LENGTH_SHORT).show()
+            portList = portList.map { it ->
+                if (it == port) {
+                    it.copy(isFavourite = !port.isFavourite)
+                } else {
+                    it
+                }
+            }
+            adapter.setData(portList)
         }
         //Interface aka. Java style
         /* val adapter = PortsAdapter(portList, object : OnClick2 {

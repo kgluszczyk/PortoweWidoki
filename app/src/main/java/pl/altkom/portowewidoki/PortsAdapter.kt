@@ -1,5 +1,6 @@
 package pl.altkom.portowewidoki
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class PortsAdapter(var portList: List<PortModel> = emptyList(), val clickListener: OnPortClick) : RecyclerView.Adapter<PortsViewHolder>() {
+class PortsAdapter(var portList: List<PortModel> = emptyList(), val clickListener: OnPortClick) :
+    RecyclerView.Adapter<PortsViewHolder>() {
 
     fun setData(portList: List<PortModel>) {
         this.portList = portList
@@ -36,6 +38,11 @@ class PortsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             findViewById<ImageView>(R.id.portImage).setImageResource(port.image)
             findViewById<TextView>(R.id.portName).text = port.name
             findViewById<TextView>(R.id.portCountry).text = port.location
+            if (port.isFavourite) {
+                findViewById<TextView>(R.id.portName).setTextColor(resources.getColor(R.color.teal_700))
+            } else {
+                findViewById<TextView>(R.id.portName).setTextColor(resources.getColor(R.color.black))
+            }
             setOnClickListener {
                 clickListener(port)
                 //Interface aka. Java style
@@ -47,5 +54,6 @@ class PortsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 typealias OnPortClick = (PortModel) -> Unit
 
 interface OnClick2 {
+
     fun onClick(model: PortModel)
 }

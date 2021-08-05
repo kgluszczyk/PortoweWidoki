@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PortoweWidoki">
         <activity
+            android:theme="@style/Theme.PortoweWidoki.NoActionBar"
             android:name=".PortyActivity"
             android:exported="true" />
         <activity

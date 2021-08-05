@@ -2,8 +2,12 @@ package pl.altkom.portowewidoki
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.MaterialToolbar
+import java.lang.IllegalStateException
 
 class PortyActivity : AppCompatActivity() {
 
@@ -43,6 +47,26 @@ class PortyActivity : AppCompatActivity() {
         })*/
 
         findViewById<RecyclerView>(R.id.port_list).adapter = adapter
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        toolbar?.let {
+            it.setNavigationOnClickListener {
+                throw IllegalStateException("Mówiełem, nie klikać!")
+            }
+
+            it.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.action0 -> {
+                        Log.d("MENU", "Żartowałem!")
+                        return@setOnMenuItemClickListener true
+                    }
+                    R.id.action1 -> {
+                        Toast.makeText(this, "KLIK!", Toast.LENGTH_SHORT).show()
+                        return@setOnMenuItemClickListener true
+                    }
+                }
+                false
+            }
+        }
     }
 }
 

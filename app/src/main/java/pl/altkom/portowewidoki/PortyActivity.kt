@@ -1,10 +1,14 @@
 package pl.altkom.portowewidoki
 
+import android.hardware.Sensor
+import android.hardware.Sensor.TYPE_ACCELEROMETER
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
 import java.lang.IllegalStateException
@@ -17,6 +21,15 @@ class PortyActivity : AppCompatActivity() {
     }
 
     lateinit var adapter: PortsAdapter
+    var accelerometrListener: SensorEventListener? = null
+
+    override fun onStop() {
+        val sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        accelerometrListener?.let {
+            sensorManager.unregisterListener(accelerometrListener)
+        }
+        super.onStop()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +69,27 @@ class PortyActivity : AppCompatActivity() {
             it.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.action0 -> {
+                        val sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+                        val accelerometer = sensorManager.getDefaultSensor(TYPE_ACCELEROMETER)
+                        accelerometrListener = object : SensorEventListener {
+                            override fun onSensorChanged(event: SensorEvent) {
+                                Log.d(
+                                    "SENSORY",
+                                    "AC:x:${event.values[0]}, y:${event.values[1]}, z:${event.values[2]}"
+                                )
+                            }
+
+                            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+
+                            }
+
+                        }
+                        sensorManager.registerListener(
+                            accelerometrListener,
+                            accelerometer,
+                            SensorManager.SENSOR_DELAY_UI
+                        )
+
                         Log.d("MENU", "Żartowałem!")
                         return@setOnMenuItemClickListener true
                     }

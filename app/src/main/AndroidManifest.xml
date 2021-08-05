@@ -13,6 +13,7 @@
             android:name=".PortyActivity"
             android:exported="true" />
         <activity
+            android:theme="@style/Theme.PortoweWidoki.NoActionBar"
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

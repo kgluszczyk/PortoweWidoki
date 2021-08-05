@@ -20,13 +20,12 @@
 
         <TextView
             android:id="@+id/header"
+            style="@style/Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/general_margin"
             android:gravity="center"
             android:text="@string/main_activity_title"
-            android:textColor="#ff0000"
-            android:textSize="@dimen/main_activity_header_text_size"
             app:layout_constraintBottom_toTopOf="@+id/icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

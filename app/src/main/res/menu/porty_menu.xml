@@ -8,5 +8,5 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action1"
-        android:title="Akcja1" />
+        android:title="Kamera" />
 </menu>

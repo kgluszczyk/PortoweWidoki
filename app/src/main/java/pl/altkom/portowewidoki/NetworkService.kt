@@ -22,4 +22,7 @@ interface HarboursService {
 
     @GET("harbours")
     fun getPorty(): Call<List<PortModel>>
+
+    @GET("harbours")
+    suspend fun getPortyNew(): List<PortModel>
 }

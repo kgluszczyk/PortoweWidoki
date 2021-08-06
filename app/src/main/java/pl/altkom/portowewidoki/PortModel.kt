@@ -22,14 +22,7 @@ data class PortModel(
 
 object PortStorage {
 
-    fun getPorts() = NetworkService.portyService.getPorty().enqueue(object : retrofit2.Callback<List<PortModel>>{
-        override fun onResponse(call: Call<List<PortModel>>, response: Response<List<PortModel>>) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onFailure(call: Call<List<PortModel>>, t: Throwable) {
-            Log.e("HARBOURS", "Failed to fetch harbours", t)
-        }
-
-    })
+    fun fetchPorts() {
+        NetworkService.portyService.getPorty().execute().body()
+    }
 }

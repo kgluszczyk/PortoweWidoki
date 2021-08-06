@@ -5,15 +5,24 @@ import android.hardware.Sensor.TYPE_ACCELEROMETER
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import pl.altkom.portowewidoki.PortStorage.fetchPorts
 import retrofit2.Call
 import retrofit2.Response
 import java.lang.IllegalStateException
+import kotlin.coroutines.CoroutineContext
 
 class PortyActivity : AppCompatActivity() {
 
@@ -21,6 +30,8 @@ class PortyActivity : AppCompatActivity() {
 
         const val CountryKey = "CountryKey"
     }
+
+    val activityScope = CoroutineScope(Dispatchers.IO)
 
     lateinit var adapter: PortsAdapter
     var accelerometrListener: SensorEventListener? = null
@@ -34,12 +45,34 @@ class PortyActivity : AppCompatActivity() {
         super.onStop()
     }
 
+    override fun onDestroy() {
+        activityScope.cancel()
+        super.onDestroy()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_porty)
         val selectedCountryCode = intent.extras?.getString(CountryKey)
+        //Wątki
+        val zadanie1 = Thread {
+            NetworkService.portyService.getPorty().execute().body()
+            runOnUiThread {
+                Toast.makeText(this, "Udało się", Toast.LENGTH_SHORT).show()
+            }
+        }
+        //zadanie1.start()
 
-        NetworkService.portyService.getPorty().enqueue(object : retrofit2.Callback<List<PortModel>>{
+        //Coroutines
+        activityScope.launch {
+            val result = NetworkService.portyService.getPortyNew()
+            withContext(Dispatchers.Main) {
+                Toast.makeText(this@PortyActivity, "Udało się: ${result.size}", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        //Callback
+        NetworkService.portyService.getPorty().enqueue(object : retrofit2.Callback<List<PortModel>> {
             override fun onResponse(call: Call<List<PortModel>>, response: Response<List<PortModel>>) {
                 portList = response.body()?.filter { it.location == selectedCountryCode } ?: emptyList()
                 adapter.setData(portList)

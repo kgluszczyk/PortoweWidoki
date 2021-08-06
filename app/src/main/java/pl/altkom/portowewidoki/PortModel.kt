@@ -19,7 +19,7 @@ data class PortModel(
     @PrimaryKey(autoGenerate = true) var id: Int = 0,
     @ColumnInfo(name = "portName") @field:Json(name = "name") var name: String = "",
     @ColumnInfo(name = "countryCode") @field:Json(name = "countryCode") var location: String = "",
-    @ColumnInfo(name = "imageUrl") @field:Json(name = "imageUrl") var image: String = "",
+    @ColumnInfo(name = "imageUrl") @field:Json(name = "imageUrl2") var image: String = "https://upload.wikimedia.org/wikipedia/commons/9/9b/In_Dry-dock_broken_engine_to_be_repaired-W_stoczni_silnik_naprawi%C4%85.jpg",
     @ColumnInfo(name = "lattitiude") @field:Json(name = "lattitiude") var lat: Double? = null,
     @ColumnInfo(name = "longitude") @field:Json(name = "longitude") var lon: Double? = null,
     @ColumnInfo(name = "isFavourite") var isFavourite: Boolean = false,

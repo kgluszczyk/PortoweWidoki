@@ -13,6 +13,7 @@ android {
         targetSdk 30
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "BASE_URL_HARBOURS", "\"https://my-json-server.typicode.com/kgluszczyk/fake-server-harbours/\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -50,6 +51,9 @@ dependencies {
 
     //MOSHI
     implementation "com.squareup.moshi:moshi-kotlin:1.12.0"
+    //RETROFIT
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

@@ -5,7 +5,8 @@ import android.widget.ImageView
 import android.widget.TextView
 
 fun View.setUpPortCardView(port: PortModel) {
-    findViewById<ImageView>(R.id.portImage).setImageResource(port.image)
+    // TODO: Przywróć obrazki - > wsparcie Urls
+    //findViewById<ImageView>(R.id.portImage).setImageResource(port.image)
     findViewById<TextView>(R.id.portName).text = port.name
     findViewById<TextView>(R.id.portCountry).text = port.location
     if (port.isFavourite) {

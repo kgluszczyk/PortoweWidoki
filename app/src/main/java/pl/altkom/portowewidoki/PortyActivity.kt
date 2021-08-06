@@ -18,6 +18,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import pl.altkom.portowewidoki.App.Companion.database
 import pl.altkom.portowewidoki.PortStorage.fetchPorts
 import retrofit2.Call
 import retrofit2.Response
@@ -65,17 +66,18 @@ class PortyActivity : AppCompatActivity() {
 
         //Coroutines
         activityScope.launch {
-            val result = NetworkService.portyService.getPortyNew()
+            portList = NetworkService.portyService.getPortyNew().filter { it.location == selectedCountryCode }
+            database.getPortyDao().delete()
+            database.getPortyDao().insert(portList)
+            val list2 = database.getPortyDao().get()
             withContext(Dispatchers.Main) {
-                Toast.makeText(this@PortyActivity, "Udało się: ${result.size}", Toast.LENGTH_SHORT).show()
+                adapter.setData(list2)
             }
         }
 
         //Callback
         NetworkService.portyService.getPorty().enqueue(object : retrofit2.Callback<List<PortModel>> {
             override fun onResponse(call: Call<List<PortModel>>, response: Response<List<PortModel>>) {
-                portList = response.body()?.filter { it.location == selectedCountryCode } ?: emptyList()
-                adapter.setData(portList)
             }
 
             override fun onFailure(call: Call<List<PortModel>>, t: Throwable) {

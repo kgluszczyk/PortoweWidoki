@@ -8,15 +8,28 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:resizeableActivity="false"
         android:theme="@style/Theme.PortoweWidoki">
         <activity
-            android:theme="@style/Theme.PortoweWidoki.NoActionBar"
             android:name=".PortyActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.PortoweWidoki.NoActionBar">
+            <intent-filter>
+                <data
+                    android:host="onet.pl"
+                    android:scheme="https" />
+
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
-            android:theme="@style/Theme.PortoweWidoki.NoActionBar"
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.PortoweWidoki.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

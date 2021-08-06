@@ -27,6 +27,9 @@ Uwagi:
         kapt "com.squareup.moshi:moshi-kotlin-codegen:1.12.0"
     }
     
+    @JsonClass(generateAdapter = true)
+    data class PortModel(....
+    
     NetworkService.kts
     
         val retrofit = Retrofit.Builder()

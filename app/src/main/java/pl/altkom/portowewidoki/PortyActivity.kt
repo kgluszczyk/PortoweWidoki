@@ -41,7 +41,7 @@ class PortyActivity : AppCompatActivity() {
 
         NetworkService.portyService.getPorty().enqueue(object : retrofit2.Callback<List<PortModel>>{
             override fun onResponse(call: Call<List<PortModel>>, response: Response<List<PortModel>>) {
-                portList = response.body()?.filter { it.countryCode == selectedCountryCode } ?: emptyList()
+                portList = response.body()?.filter { it.location == selectedCountryCode } ?: emptyList()
                 adapter.setData(portList)
             }
 

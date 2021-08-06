@@ -9,10 +9,10 @@ import retrofit2.http.GET
 
 object NetworkService {
 
-    val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
+    //val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
 
     val retrofit = Retrofit.Builder()
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addConverterFactory(MoshiConverterFactory.create())
         .baseUrl(BuildConfig.BASE_URL_HARBOURS)
         .build()
     val portyService = retrofit.create(HarboursService::class.java)

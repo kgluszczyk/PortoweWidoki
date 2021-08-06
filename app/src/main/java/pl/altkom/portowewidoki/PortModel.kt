@@ -10,12 +10,13 @@ import retrofit2.Call
 import retrofit2.Response
 
 @Parcelize
+@JsonClass(generateAdapter = true)
 data class PortModel(
     @field:Json(name = "name") val name: String,
-    @field:Json(name = "countryCode") val countryCode: String,
-    @field:Json(name = "imageUrl") val imageUrl: String = "",
-    @field:Json(name = "lattitiude") val lattitiude: Double? = null,
-    @field:Json(name = "longitude") val longitude: Double? = null,
+    @field:Json(name = "countryCode") val location: String,
+    @field:Json(name = "imageUrl") val image: String = "",
+    @field:Json(name = "lattitiude") val lat: Double? = null,
+    @field:Json(name = "longitude") val long: Double? = null,
     val isFavourite: Boolean = false
 ) : Parcelable
 
